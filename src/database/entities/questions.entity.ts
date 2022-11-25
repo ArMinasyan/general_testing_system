@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseEntity } from '../../common/helpers/baseEntity';
+import { BaseEntity } from '../../common/baseEntity';
 import questionTypes from '../../common/types/question.types';
 import { AnswersEntity } from './answers.entity';
 

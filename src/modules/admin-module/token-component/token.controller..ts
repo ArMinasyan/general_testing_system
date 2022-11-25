@@ -10,17 +10,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AdminModuleService } from '../admin-module.service';
 import {
   DeleteTokenParamDto,
   GenerateTokenDto,
   GetTokensByUserIdDto,
-} from '../dto';
+} from './token-action.dto';
+import { TokenService } from './token.service';
 
 @ApiTags('Admin Tokens')
 @Controller('admin/tokens')
-export class TokensController {
-  constructor(private readonly service: AdminModuleService) {}
+export class TokenController {
+  constructor(private readonly service: TokenService) {}
 
   @HttpCode(HttpStatus.OK)
   @Get()

@@ -8,13 +8,17 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateConfigDto, UpdateConfigDto, UpdateConfigParamDto } from '../dto';
-import { AdminModuleService } from '../admin-module.service';
+import {
+  CreateConfigDto,
+  UpdateConfigDto,
+  UpdateConfigParamDto,
+} from './config-action.dto';
+import { ConfigService } from './config.service';
 
 @ApiTags('Admin Config')
 @Controller('admin/configs')
-export class ConfigsController {
-  constructor(private readonly service: AdminModuleService) {}
+export class ConfigController {
+  constructor(private readonly service: ConfigService) {}
 
   @HttpCode(HttpStatus.CREATED)
   @Post()

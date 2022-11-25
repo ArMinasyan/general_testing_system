@@ -8,13 +8,13 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { DeleteUserParamDto, CreateUserDto } from '../dto';
-import { AdminModuleService } from '../admin-module.service';
+import { DeleteUserParamDto, CreateUserDto } from './create-user.dto';
+import { UserService } from './user.service';
 
 @ApiTags('Admin Users')
 @Controller('users')
-export class UsersController {
-  constructor(private readonly service: AdminModuleService) {}
+export class UserController {
+  constructor(private readonly service: UserService) {}
 
   @HttpCode(HttpStatus.CREATED)
   @Post()

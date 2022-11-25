@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BaseEntity } from '../../common/helpers/baseEntity';
+import { BaseEntity } from '../../common/baseEntity';
 import { UsersEntity } from './user.entity';
 import resultTypes from '../../common/types/result.types';
 

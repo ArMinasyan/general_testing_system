@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AdminModuleModule } from './modules/admin-module/admin-module.module';
+import { AdminModule } from './modules/admin-module/admin.module';
 import { AuthModuleModule } from './modules/auth-module/auth-module.module';
 import { UserModuleModule } from './modules/user-module/user-module.module';
 import configuration from './configuration';
@@ -57,7 +57,7 @@ import {
         },
       }),
     }),
-    AdminModuleModule,
+    AdminModule,
     AuthModuleModule,
     UserModuleModule,
   ],

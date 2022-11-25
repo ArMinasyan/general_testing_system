@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BaseEntity } from '../../common/helpers/baseEntity';
+import { BaseEntity } from '../../common/baseEntity';
 import { UsersEntity } from './user.entity';
 import { ConfigsEntity } from './configs.entity';
 import { TokensEntity } from './tokens.entity';
