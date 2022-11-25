@@ -14,17 +14,17 @@ import { AdminModuleService } from '../admin-module.service';
 @ApiTags('Admin Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: AdminModuleService) {}
+  constructor(private readonly service: AdminModuleService) {}
 
   @HttpCode(HttpStatus.CREATED)
   @Post()
   createUser(@Body() payload: CreateUserDto) {
-    return this.userService.createUser(payload);
+    return this.service.createUser(payload);
   }
 
   @HttpCode(HttpStatus.OK)
   @Delete(':userId')
   deleteUser(@Param() param: DeleteUserParamDto) {
-    return this.userService.deleteUser(param);
+    return this.service.deleteUser(param);
   }
 }

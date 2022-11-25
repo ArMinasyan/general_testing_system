@@ -20,23 +20,23 @@ import {
 @ApiTags('Admin Tokens')
 @Controller('admin/tokens')
 export class TokensController {
-  constructor(private readonly userService: AdminModuleService) {}
+  constructor(private readonly service: AdminModuleService) {}
 
   @HttpCode(HttpStatus.OK)
   @Get()
   getTokensByUserId(@Query() query: GetTokensByUserIdDto) {
-    return this.userService.getTokensByUserId(query.userId);
+    return this.service.getTokensByUserId(query.userId);
   }
 
   @HttpCode(HttpStatus.CREATED)
   @Post('generate')
   generateToken(@Body() payload: GenerateTokenDto) {
-    return this.userService.generateToken(payload.userId);
+    return this.service.generateToken(payload.userId);
   }
 
   @HttpCode(HttpStatus.OK)
   @Delete(':tokenId')
   deleteToken(@Param() param: DeleteTokenParamDto) {
-    return this.userService.deleteToken(param.tokenId);
+    return this.service.deleteToken(param.tokenId);
   }
 }

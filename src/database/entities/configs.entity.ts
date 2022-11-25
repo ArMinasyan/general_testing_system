@@ -16,6 +16,11 @@ export class ConfigsEntity extends BaseEntity {
   @Column({
     nullable: false,
   })
+  max_point: number;
+
+  @Column({
+    nullable: false,
+  })
   pass_point: number;
 
   @Column({

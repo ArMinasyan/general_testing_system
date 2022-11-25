@@ -1,28 +1,40 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { DeleteUserParamDto, CreateUserDto } from './dto';
-import { TokenRepository, UserRepository } from '../../database/repositories';
-import responseMessage from '../../common/helpers/response-message';
+import {
+  CreateConfigDto,
+  CreateUserDto,
+  DeleteUserParamDto,
+  UpdateConfigDto,
+} from './dto';
+import {
+  ConfigRepository,
+  TokenRepository,
+  UserRepository,
+} from '../../database/repositories';
+import { BaseService } from '../../common/baseService';
 
 @Injectable()
-export class AdminModuleService {
+export class AdminModuleService extends BaseService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly tokenRepository: TokenRepository,
-  ) {}
+    private readonly configRepository: ConfigRepository,
+  ) {
+    super();
+  }
 
   async createUser(payload: CreateUserDto) {
     try {
       const user = await this.userRepository.save({
         email: payload.email,
-        ...(payload.with_token ? {} : {}),
+        ...(payload.withToken ? {} : {}),
       });
 
-      return responseMessage({
+      return this.responseMessage({
         statusCode: HttpStatus.CREATED,
         data: user,
       });
     } catch (error) {
-      responseMessage({ success: false, data: error });
+      this.responseMessage({ success: false, data: error });
     }
   }
 
@@ -32,11 +44,11 @@ export class AdminModuleService {
         id: param.userId,
       });
 
-      return responseMessage({
+      return this.responseMessage({
         data: user,
       });
     } catch (error) {
-      responseMessage({ success: false, data: error });
+      this.responseMessage({ success: false, data: error });
     }
   }
 
@@ -46,12 +58,12 @@ export class AdminModuleService {
         user: userId,
       });
 
-      return responseMessage({
+      return this.responseMessage({
         statusCode: HttpStatus.CREATED,
         data: token,
       });
     } catch (error) {
-      responseMessage({ success: false, data: error });
+      this.responseMessage({ success: false, data: error });
     }
   }
 
@@ -61,11 +73,11 @@ export class AdminModuleService {
         id: tokenId,
       });
 
-      return responseMessage({
+      return this.responseMessage({
         data: token,
       });
     } catch (error) {
-      responseMessage({ success: false, data: error });
+      this.responseMessage({ success: false, data: error });
     }
   }
 
@@ -77,11 +89,40 @@ export class AdminModuleService {
         },
       });
 
-      return responseMessage({
+      return this.responseMessage({
         data: tokens,
       });
     } catch (error) {
-      responseMessage({ success: false, data: error });
+      this.responseMessage({ success: false, data: error });
+    }
+  }
+
+  async createConfig(payload: CreateConfigDto) {
+    try {
+      const config = await this.configRepository.save(this.toEntity(payload));
+
+      return this.responseMessage({
+        data: config,
+      });
+    } catch (error) {
+      this.responseMessage({ success: false, data: error });
+    }
+  }
+
+  async updateConfig(configId: number, payload: UpdateConfigDto) {
+    try {
+      const config = await this.configRepository.update(
+        {
+          id: configId,
+        },
+        this.toEntity(payload),
+      );
+
+      return this.responseMessage({
+        data: config,
+      });
+    } catch (error) {
+      this.responseMessage({ success: false, data: error });
     }
   }
 }

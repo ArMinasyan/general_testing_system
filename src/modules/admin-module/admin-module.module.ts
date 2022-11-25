@@ -1,13 +1,28 @@
 import { Module } from '@nestjs/common';
 import { AdminModuleService } from './admin-module.service';
-import { TokensController, UsersController } from './controllers';
-import { TokenRepository, UserRepository } from '../../database/repositories';
+import {
+  ConfigsController,
+  TokensController,
+  UsersController,
+} from './controllers';
+import {
+  ConfigRepository,
+  TokenRepository,
+  UserRepository,
+} from '../../database/repositories';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersEntity } from '../../database/entities';
+import { ConfigsEntity, UsersEntity } from '../../database/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsersEntity, TokenRepository])],
-  controllers: [UsersController, TokensController],
-  providers: [AdminModuleService, UserRepository, TokenRepository],
+  imports: [
+    TypeOrmModule.forFeature([UsersEntity, TokenRepository, ConfigsEntity]),
+  ],
+  controllers: [UsersController, TokensController, ConfigsController],
+  providers: [
+    AdminModuleService,
+    UserRepository,
+    TokenRepository,
+    ConfigRepository,
+  ],
 })
 export class AdminModuleModule {}
