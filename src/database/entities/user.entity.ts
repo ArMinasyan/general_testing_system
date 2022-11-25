@@ -12,14 +12,18 @@ export class UsersEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => TokensEntity, (token) => token.user)
+  @OneToMany(() => TokensEntity, (token) => token.user, {
+    cascade: ['soft-remove'],
+  })
   tokens: TokensEntity;
 
-  @OneToMany(() => ResultsEntity, (result) => result.user)
+  @OneToMany(() => ResultsEntity, (result) => result.user, {
+    cascade: ['soft-remove'],
+  })
   results: ResultsEntity;
 
   @Column({
-    nullable: true,
+    nullable: false,
   })
   email: string;
 
@@ -34,10 +38,4 @@ export class UsersEntity extends BaseEntity {
     nullable: true,
   })
   password: string;
-
-  @Column({
-    nullable: false,
-    default: false,
-  })
-  with_token: boolean;
 }

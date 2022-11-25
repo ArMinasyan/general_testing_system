@@ -8,6 +8,7 @@ import {
 import { BaseEntity } from '../../common/helpers/baseEntity';
 import { UsersEntity } from './user.entity';
 import { ConfigsEntity } from './configs.entity';
+import { TokensEntity } from './tokens.entity';
 
 @Entity({
   name: 'user_test_config_xref',
@@ -23,4 +24,8 @@ export class UserTestConfigXref extends BaseEntity {
   @OneToOne(() => ConfigsEntity, (config) => config.id)
   @JoinColumn({ name: 'config_id' })
   config: ConfigsEntity;
+
+  @OneToOne(() => TokensEntity, (token) => token.id)
+  @JoinColumn({ name: 'token_id' })
+  token: TokensEntity;
 }

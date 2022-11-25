@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -25,6 +24,16 @@ export class TokensEntity extends BaseEntity {
   })
   last_used: Date;
 
-  @Generated('uuid')
+  @Column({
+    type: 'uuid',
+    generated: 'uuid',
+    unique: true,
+  })
   token: string;
+
+  @Column({
+    nullable: false,
+    default: true,
+  })
+  is_valid: true;
 }
